@@ -7,7 +7,10 @@ import com.vk.api.sdk.exceptions.ClientException
 import com.vk.api.sdk.objects.messages.Message
 import com.vk.api.sdk.queries.messages.MessagesGetLongPollHistoryQuery
 import java.lang.Thread.sleep
+import java.net.InetAddress
+import java.net.InetSocketAddress
 import java.net.ServerSocket
+import java.net.Socket
 import java.util.*
 import java.util.concurrent.Executors
 
@@ -29,9 +32,10 @@ fun main() {
         try
         {
             if(aliveCount == 100) {
+                aliveCount = 0
                 socket = ServerSocket(port.toInt())
                 socket.accept()
-                aliveCount = 0
+                InetAddress.getByName("127.0.0.1").isReachable(100)
             }
             val message: Message? = getMessage()
             if(message != null){
