@@ -21,6 +21,7 @@ var ts: Int = vk.messages().getLongPollServer(actor).execute().ts
 val rand = Random()
 var port = System.getenv("PORT") // Heroku
 val socket: ServerSocket = ServerSocket(port.toInt())
+var aliveCount: Int = 0
 
 fun main() {
     println("Running server...")
@@ -32,21 +33,13 @@ fun main() {
                 if(!ControlPanel.handleCommand(message.text, message.peerId)) vk.messages().send(actor).peerId(message.peerId).randomId(
                     rand.nextInt(999999)).message("Неизвестная команда!").execute()
             }
+            if(aliveCount == 25) socket.accept()
         }
         catch(e: Exception){
             e.printStackTrace()
         }
         sleep(300)
-        doAlive()
-    }
-}
-
-fun doAlive(){
-    try {
-        socket.accept()
-    }
-    catch(e: Exception){
-        e.printStackTrace()
+        aliveCount++
     }
 }
 fun getMessage(): Message? {
