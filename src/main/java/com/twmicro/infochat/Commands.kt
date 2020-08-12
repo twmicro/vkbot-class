@@ -18,6 +18,7 @@ object Commands {
         }
 
     })
+
     private fun command(command: IBotCommand) : IBotCommand {
         commands.add(command)
         return command

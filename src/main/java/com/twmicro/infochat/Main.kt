@@ -38,7 +38,9 @@ fun main() {
             }
             val message: Message? = getMessage()
             if(message != null){
-                ControlPanel.handleCommand(message.text, message.peerId)
+                println("Received message: ${message.text}")
+                if(ControlPanel.handleCommand(message.text, message.peerId))
+                    println("Handled command!")
             }
         }
         catch(e: Exception){
