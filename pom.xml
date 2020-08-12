@@ -61,20 +61,6 @@
 
     <build>
         <plugins>
-
-            <plugin>
-                <groupId>com.heroku.sdk</groupId>
-                <artifactId>heroku-maven-plugin</artifactId>
-                <version>3.0.3</version>
-                <configuration>
-                    <appName>vk-group-bot</appName>
-                    <processTypes>
-                        <worker>
-                            java $JAVA_OPTS com.twmicro.infochat.MainKt
-                        </worker>
-                    </processTypes>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
