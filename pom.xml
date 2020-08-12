@@ -10,6 +10,7 @@
 
     <properties>
         <kotlin.version>1.4.0-rc</kotlin.version>
+        <exec.mainClass>com.twmicro.infochat.MainKt</exec.mainClass>
     </properties>
 
     <dependencies>
