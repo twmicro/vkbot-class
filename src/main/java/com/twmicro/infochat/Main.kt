@@ -18,6 +18,7 @@ const val groupId = 158048496
 val actor = GroupActor(groupId, token)
 var ts: Int = vk.messages().getLongPollServer(actor).execute().ts
 val rand = Random()
+val port = System.getenv("PORT") // Heroku
 
 fun main() {
     println("Running server...")
