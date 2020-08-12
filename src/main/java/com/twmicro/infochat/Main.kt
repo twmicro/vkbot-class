@@ -20,7 +20,7 @@ val actor = GroupActor(groupId, token)
 var ts: Int = vk.messages().getLongPollServer(actor).execute().ts
 val rand = Random()
 var port = System.getenv("PORT") // Heroku
-val socket: ServerSocket = ServerSocket(port.toInt())
+var socket: ServerSocket = ServerSocket(port.toInt())
 var aliveCount: Int = 0
 
 fun main() {
@@ -28,14 +28,15 @@ fun main() {
     while(true) {
         try
         {
+            if(aliveCount == 100) {
+                socket = ServerSocket(port.toInt())
+                socket.accept()
+                aliveCount = 0
+            }
             val message: Message? = getMessage()
             if(message != null){
                 if(!ControlPanel.handleCommand(message.text, message.peerId)) vk.messages().send(actor).peerId(message.peerId).randomId(
                     rand.nextInt(999999)).message("Неизвестная команда!").execute()
-            }
-            if(aliveCount == 25) {
-                socket.accept()
-                aliveCount = 0
             }
         }
         catch(e: Exception){
