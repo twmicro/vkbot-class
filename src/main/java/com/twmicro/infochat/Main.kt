@@ -18,7 +18,7 @@ const val groupId = 158048496
 val actor = GroupActor(groupId, token)
 var ts: Int = vk.messages().getLongPollServer(actor).execute().ts
 val rand = Random()
-val port = System.getenv("PORT") // Heroku
+var port = System.getenv("PORT") // Heroku
 
 fun main() {
     println("Running server...")
@@ -35,9 +35,13 @@ fun main() {
             e.printStackTrace()
         }
         sleep(300)
+        doAlive()
     }
 }
 
+fun doAlive(){
+    port = System.getenv("PORT")
+}
 fun getMessage(): Message? {
     val eventsQuery: MessagesGetLongPollHistoryQuery = vk.messages()
         .getLongPollHistory(actor)
