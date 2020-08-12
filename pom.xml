@@ -6,11 +6,10 @@
 
     <groupId>org.twmicro</groupId>
     <artifactId>6bbot</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-ALPHA2</version>
 
     <properties>
         <kotlin.version>1.4.0-rc</kotlin.version>
-        <exec.mainClass>com.twmicro.infochat.MainKt</exec.mainClass>
     </properties>
 
     <dependencies>
@@ -62,6 +61,7 @@
 
     <build>
         <plugins>
+
             <plugin>
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
@@ -70,7 +70,7 @@
                     <appName>vk-group-bot</appName>
                     <processTypes>
                         <worker>
-                            java $JAVA_OPTS -cp target/classes:target/dependency/* com.twmicro.infochat.MainKt
+                            java $JAVA_OPTS com.twmicro.infochat.MainKt
                         </worker>
                     </processTypes>
                 </configuration>
@@ -97,6 +97,39 @@
                 </executions>
                 <configuration>
                     <jvmTarget>1.8</jvmTarget>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.build.directory}/lib
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.twmicro.infochat.MainKt</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

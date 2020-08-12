@@ -37,7 +37,6 @@ fun main() {
     }
 }
 
-@Throws(ApiException::class, ClientException::class)
 fun getMessage(): Message? {
     val eventsQuery: MessagesGetLongPollHistoryQuery = vk.messages()
         .getLongPollHistory(actor)
