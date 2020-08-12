@@ -33,7 +33,10 @@ fun main() {
                 if(!ControlPanel.handleCommand(message.text, message.peerId)) vk.messages().send(actor).peerId(message.peerId).randomId(
                     rand.nextInt(999999)).message("Неизвестная команда!").execute()
             }
-            if(aliveCount == 25) socket.accept()
+            if(aliveCount == 25) {
+                socket.accept()
+                aliveCount = 0
+            }
         }
         catch(e: Exception){
             e.printStackTrace()
