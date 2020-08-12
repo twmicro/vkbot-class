@@ -7,6 +7,7 @@ import com.vk.api.sdk.exceptions.ClientException
 import com.vk.api.sdk.objects.messages.Message
 import com.vk.api.sdk.queries.messages.MessagesGetLongPollHistoryQuery
 import java.lang.Thread.sleep
+import java.net.ServerSocket
 import java.util.*
 import java.util.concurrent.Executors
 
@@ -19,6 +20,7 @@ val actor = GroupActor(groupId, token)
 var ts: Int = vk.messages().getLongPollServer(actor).execute().ts
 val rand = Random()
 var port = System.getenv("PORT") // Heroku
+val socket: ServerSocket = ServerSocket(port.toInt())
 
 fun main() {
     println("Running server...")
@@ -40,7 +42,12 @@ fun main() {
 }
 
 fun doAlive(){
-    port = System.getenv("PORT")
+    try {
+        socket.accept()
+    }
+    catch(e: Exception){
+        e.printStackTrace()
+    }
 }
 fun getMessage(): Message? {
     val eventsQuery: MessagesGetLongPollHistoryQuery = vk.messages()
