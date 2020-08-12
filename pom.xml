@@ -6,7 +6,7 @@
 
     <groupId>org.twmicro</groupId>
     <artifactId>6bbot</artifactId>
-    <version>1.0-ALPHA2</version>
+    <version>1.0-BETA</version>
 
     <properties>
         <kotlin.version>1.4.0-rc</kotlin.version>

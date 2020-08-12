@@ -1,1 +1,1 @@
-web: java -jar target/6bbot-1.0-ALPHA2.jar
+web: java -jar target/6bbot-1.0-BETA.jar

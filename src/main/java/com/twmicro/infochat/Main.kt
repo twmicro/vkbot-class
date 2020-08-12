@@ -33,7 +33,6 @@ fun main() {
         {
             if(aliveCount == 100) {
                 aliveCount = 0
-                socket = ServerSocket(port.toInt())
                 socket.accept()
                 InetAddress.getByName("127.0.0.1").isReachable(100)
             }
