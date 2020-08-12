@@ -38,8 +38,7 @@ fun main() {
             }
             val message: Message? = getMessage()
             if(message != null){
-                if(!ControlPanel.handleCommand(message.text, message.peerId)) vk.messages().send(actor).peerId(message.peerId).randomId(
-                    rand.nextInt(999999)).message("Неизвестная команда!").execute()
+                ControlPanel.handleCommand(message.text, message.peerId)
             }
         }
         catch(e: Exception){
