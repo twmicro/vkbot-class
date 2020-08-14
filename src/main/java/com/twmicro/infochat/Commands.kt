@@ -19,8 +19,20 @@ object Commands {
 
     })
 
+
     private fun command(command: IBotCommand) : IBotCommand {
         commands.add(command)
         return command
     }
+
+    // CLASS GAME AREA
+    val startInvesting = command(object : IBotCommand{
+        override fun getName(): String {
+            return "/начать_класс_гейм"
+        }
+
+        override fun handle(peerId: Int?, args: String) {
+
+        }
+    })
 }

@@ -22,20 +22,20 @@ const val groupId = 158048496
 val actor = GroupActor(groupId, token)
 var ts: Int = vk.messages().getLongPollServer(actor).execute().ts
 val rand = Random()
-var port = System.getenv("PORT") // Heroku
-var socket: ServerSocket = ServerSocket(port.toInt())
-var aliveCount: Int = 0
+//var port = System.getenv("PORT") // Heroku
+//var socket: ServerSocket = ServerSocket(port.toInt())
+//var aliveCount: Int = 0
 
 fun main() {
     println("Running server...")
     while(true) {
         try
         {
-            if(aliveCount == 100) {
+            /*if(aliveCount == 100) {
                 aliveCount = 0
                 socket.accept()
                 InetAddress.getByName("127.0.0.1").isReachable(100)
-            }
+            }*/
             val message: Message? = getMessage()
             if(message != null){
                 println("Received message: ${message.text}")
@@ -47,7 +47,7 @@ fun main() {
             e.printStackTrace()
         }
         sleep(300)
-        aliveCount++
+        //aliveCount++
     }
 }
 fun getMessage(): Message? {
